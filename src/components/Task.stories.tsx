@@ -1,15 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
+
+import { fn } from 'storybook/test';
+
 import Task from './Task';
 
+export const ActionsData = {
+  onArchiveTask: fn(),
+  onPinTask: fn(),
+};
+
 const meta = {
-  title: 'Task',
   component: Task,
+  title: 'Task',
   tags: ['autodocs'],
-  // Standard 2026: Provide global actions here
+  //👇 Our exports that end in "Data" are not stories.
+  excludeStories: /.*Data$/,
   args: {
-    onArchiveTask: fn(),
-    onPinTask: fn(),
+    ...ActionsData,
   },
 } satisfies Meta<typeof Task>;
 
@@ -29,16 +37,16 @@ export const Default: Story = {
 export const Pinned: Story = {
   args: {
     task: {
-      ...Default.args?.task!,
+      ...Default.args.task,
       state: 'TASK_PINNED',
     },
   },
 };
 
-export const Archive: Story = {
+export const Archived: Story = {
   args: {
     task: {
-      ...Default.args?.task!,
+      ...Default.args.task,
       state: 'TASK_ARCHIVED',
     },
   },
