@@ -8,6 +8,7 @@ import Task from './Task';
 export const ActionsData = {
   onArchiveTask: fn(),
   onPinTask: fn(),
+  onUnArchiveTask: fn()
 };
 
 const meta = {
